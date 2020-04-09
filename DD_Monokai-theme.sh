@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 wget https://raw.githubusercontent.com/oneKelvinSmith/monokai-emacs/master/monokai-theme.el
 
