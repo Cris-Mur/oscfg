@@ -1,6 +1,4 @@
 #!/bin/bash
 
-echo alias l=\'ls -la\' >> ~/.bashrc
-echo alias emacs=\'emacs -nw\' >> ~/.bashrc
-
-source ~/.bashrc
+cat aliases.txt >> ~/.bashrc
+echo "After this script you execute:\n$ source ~/.bashrc\n"
