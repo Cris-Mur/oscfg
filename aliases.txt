@@ -1,5 +1,5 @@
 
-[Cris-Mur Aliases]
+#[Cris-Mur Aliases]
 alias l='ls -la'
 alias emacs='emacs -nw'
 alias tom='~/set-up-Linux-/./git_log.sh'
