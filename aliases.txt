@@ -2,4 +2,9 @@
 #[Cris-Mur Aliases]
 alias l='ls -la'
 alias emacs='emacs -nw'
-alias tom='~/set-up-Linux-/./git_log.sh'
+alias tom='~/settings_linux/./git_log.sh'
+alias gcc='gcc -Wall -pedantic -Werror -Wextra'
+alias js-bang='echo "#!/usr/bin/node" | tee *.js'
+alias bsh-bang='echo "#!/usr/bin/bash" | tee *.sh'
+alias py-bang='echo "#!/usr/bin/python3" | tee *.py'
+alias envy-bsh='echo "#!/usr/bin/env bash" | tee *.sh'
