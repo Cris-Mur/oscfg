@@ -9,3 +9,5 @@ alias bsh-bang='echo "#!/usr/bin/bash" | tee *.sh'
 alias py-bang='echo "#!/usr/bin/python3" | tee *.py'
 alias envy-bsh='echo "#!/usr/bin/env bash" | tee *.sh'
 alias sts='git status'
+
+PS1='[\[\e[91m\]\d\[\e[00m\] \[\e[33m\]\t\[\e[m\] ] [\u@\h \W] \[$(ls -A| wc -l)\]\$ '
