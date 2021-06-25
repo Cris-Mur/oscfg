@@ -1,7 +1,7 @@
 
 #[Cris-Mur Aliases]
 alias l='ls -lah'
-alias cp='cp -riv'
+alias ll='ls -lh'
 alias emacs='emacs -nw'
 alias tom='~/settings_linux/./git_log.sh'
 alias gcc='gcc -Wall -pedantic -Werror -Wextra'
@@ -10,13 +10,25 @@ alias bsh-bang='echo "#!/usr/bin/bash" | tee *.sh'
 alias py-bang='echo "#!/usr/bin/python3" | tee *.py'
 alias envy-bsh='echo "#!/usr/bin/env bash" | tee *.sh'
 alias sts='git status'
-alias dnc='dotnet new console -o'
-alias dbr='dotnet build && dotnet run'
+alias daily='cat $HOME/daily'
+alias t='tree -aI "node_modules|.git"'
+alias mv='mv -iv'
+alias cp='cp -riv'
+alias mkdir='mkdir -pv'
 
-PS1='[\[\e[91m\]\d\[\e[00m\] \
+PS1='[ \e[91m\]\d\[\e[00m\] \
 \[\e[33m\]\t\[\e[m\] ]
 [ \[\e[01;35m\]\u\[\e[00m\]\
 @\
 \[\e[01;32m\]\h\[\e[00m\] \
 \[\e[01;34m\]\W\[\e[00m\] ] \
 \[$(ls -A| wc -l)\] \$ '
+
+PATH="$PATH:~/.emacs.d/bin"
+
+alias dnc='dotnet new console -o'
+alias br='dotnet build && dotnet run'
+
+DEVKITPRO=/opt/devkitpro
+DEVKITARM=/opt/devkitpro/devkitARM
+DEVKITPPC=/opt/devkitpro/devkitPPC
