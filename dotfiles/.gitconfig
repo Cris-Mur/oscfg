@@ -1,0 +1,7 @@
+[user]
+	name = Cris-Mur
+	email = yomy98@gmail.com
+[core]
+	editor = emacs
+[pull]
+	rebase = false

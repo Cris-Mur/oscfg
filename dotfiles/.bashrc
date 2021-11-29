@@ -1,7 +1,16 @@
+#
+# ~/.bashrc
+#[ @Cris-Mur ]
+#
 
-#[Cris-Mur Aliases]
-alias l='ls -lah'
-alias ll='ls -lh'
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=always'
+alias l='ls -lh'
+alias ll='ls -lah'
+PS1='[\u@\h \W]\$ '
+
 alias emacs='emacs -nw'
 alias tom='~/settings_linux/./git_log.sh'
 alias gcc='gcc -Wall -pedantic -Werror -Wextra'
@@ -16,13 +25,7 @@ alias mv='mv -iv'
 alias cp='cp -riv'
 alias mkdir='mkdir -pv'
 
-PS1='[ \e[91m\]\d\[\e[00m\] \
-\[\e[33m\]\t\[\e[m\] ]
-[ \[\e[01;35m\]\u\[\e[00m\]\
-@\
-\[\e[01;32m\]\h\[\e[00m\] \
-\[\e[01;34m\]\W\[\e[00m\] ] \
-\[$(ls -A| wc -l)\] \$ '
+PS1='[ \e[91m\]\d\[\e[00m\] \[\e[33m\]\t\[\e[m\] ]\[ \[\e[01;35m\]\u\[\e[00m\]@\[\e[01;32m\]\h\[\e[00m\] \[\e[01;34m\]\W\[\e[00m\] ] \[$(ls -A| wc -l)\] \$ '
 
 PATH="$PATH:~/.emacs.d/bin"
 
