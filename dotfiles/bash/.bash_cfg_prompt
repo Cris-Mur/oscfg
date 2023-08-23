@@ -1,0 +1,17 @@
+# .bash_cfg_prompt
+# [ @ Cris-Mur ]
+# Bash Configuration history
+# this file contains history settings.
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${arch-chroot:+($arch-chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
