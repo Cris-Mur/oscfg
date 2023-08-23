@@ -8,7 +8,7 @@ fi
 NLINES=20
 if [ -z "$2" ]
 then
-    echo 'default output 20 Lines'
+    echo 'default output 20 Lines\n'
 else
     NLINES="$2"
 fi
