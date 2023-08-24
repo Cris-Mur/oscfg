@@ -29,7 +29,9 @@ fi
 if [ -d ~/env/ ]; then
 	for env_file in ~/env/*
 	do
-		echo "load $env_file"
     	. $env_file
 	done
+	echo "Enviroments are loaded"
 fi
+
+neofetch
