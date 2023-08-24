@@ -1,0 +1,1 @@
+useradd -m -s /bin/bash -G ftp,games,http,sys,uucp,wheel,audio,disk,input,kvm,optical,scanner,storage,video,network sowbeu

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+pacstrap -K /mnt \
+    base \
+    base-devel \
+    linux \
+    linux-firmware \
+    vi \
+    sudo \
+    visudo \
+    ntfs-3g \
+    grub \
+    efibootmgr \
+    os-prober \
+    networkmanager \
+    net-tools \
+    ufw \
+    alsa \
+    alsa-firmware \
+    alsamixer \
+    alsa-utils \
+    man-db \
+    vim \
+    tree \
+    git \
+    bash-completion \
+    bat \
+    htop \
+    tmux \
+    wget \
+    curl \
+    neofetch \
+    go \
+    nodejs \
+    npm \
+    libarchive \
+    gzip \
+    unrar \
+    p7zip \
+    zip \
+    unzip \
