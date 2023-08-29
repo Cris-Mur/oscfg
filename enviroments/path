@@ -9,6 +9,6 @@ if [ -d /opt/sonar-scanner ]; then
 fi
 
 if [ -d $HOME/oscfg/scripts/utils ]; then
-    utils_path="$HOME/oscfg/scripts/utils"
+    utils_path="$HOME/oscfg/scripts/utils/bin"
     PATH="$PATH:$utils_path"
 fi
