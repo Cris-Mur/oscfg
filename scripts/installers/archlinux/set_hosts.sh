@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
 
 if [ "$(id -u)" -ne 0 ]; then
-    echo "This script must be run as root."
-    exit 1
+    echo "This script must be run as root.";
+    exit 1;
 fi
 
-myhostname=$(cat /etc/hostname)
+if [ ! -f "/etc/hosts" ]; then
+    echo "host file not found.";
+    exit 1;
+fi
 
-hosts=(
-    "127.0.0.1		localhost"\
-    "::1		localhost"\
-    "127.0.1.1		$myhostname"\
-)
+whoami=$(cat /etc/hostname);
 
-for host in ${hosts[@]}; do
-    sed -i "$host" /etc/hosts
-done
+hosts_ "-a" "localhost" "127.0.0.1"
+hosts_ "-a" "$whoami" "127.0.0.1"
