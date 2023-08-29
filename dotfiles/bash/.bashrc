@@ -25,13 +25,14 @@ if [ -f ~/.bash_cfg_completion ]; then
 	. ~/.bash_cfg_completion
 fi
 
+neofetch;
 # load enviroment variables dir
 if [ -d ~/env/ ]; then
+	env_counter=0;
 	for env_file in ~/env/*
 	do
     	. $env_file
+		let env_counter++;
 	done
-	echo "Enviroments are loaded"
+	echo "$env_counter# Enviroment files are loaded."
 fi
-
-neofetch

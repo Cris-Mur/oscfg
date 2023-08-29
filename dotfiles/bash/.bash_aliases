@@ -1,8 +1,6 @@
 ############################## ALIASES | CRIS-MUR #############################
 
 ## Git
-
-alias glog='~/settings_linux/scripts/./git_log.sh'
 alias sts='git status'
 
 ## Dotnet
