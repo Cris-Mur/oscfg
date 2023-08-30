@@ -15,6 +15,7 @@ hosts_file="/etc/hosts"
 function print_help() {
     help="\nhosts_: Usage [option] [name/domain] [ip/host]\n
     \tOptions:\n
+    \t\t-h --help : Show help message\n
     \t\t-l --list : Show hosts file\n
     \t\t-a --add : Add hosts in file\n
     \t\t-d --delete : Delete hosts in file\n";
