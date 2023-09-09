@@ -23,4 +23,5 @@ else
     echo "Over Writing file..."
 fi
 
-echo -e "LANG=$main_LANG" > $locale_file
+echo -e "LANG=$main_LANG" > $locale_file # Raw method
+# localectl set-locale LANG=$main_LANG # use localctl method
