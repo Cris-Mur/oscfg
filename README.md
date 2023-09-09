@@ -1,17 +1,17 @@
-# Settings
+# OS Config
 
-## Descripción
-
-Repositiorio de configuraciones **dotfiles** para diversos sistemas operativos.
+Archivos de configuracion y scripts de utilidad.
 
 ---
+
+## Dotfiles
+these files are common in many aplication and utilities in many systems.
+
+## Enviroments
+prefixed enviroment variables, concept per file for convenince.
 
 ## Scripts
-Scripts utiles para las configuraciones, algunos son para la descarga de recursos, o utilitarios
-
----
-## ReSouRCeS
-Otro tipo de recursos que ayudan a la instalacion de las configuraciones.
+Utilities writen to make more confort in the system.
 
 ---
 
