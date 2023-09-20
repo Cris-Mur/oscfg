@@ -5,9 +5,9 @@ pacstrap -K /mnt \
     base-devel \
     linux \
     linux-firmware \
+    linux-headers \
     vi \
     sudo \
-    visudo \
     ntfs-3g \
     grub \
     efibootmgr \
@@ -15,9 +15,7 @@ pacstrap -K /mnt \
     networkmanager \
     net-tools \
     ufw \
-    alsa \
     alsa-firmware \
-    alsamixer \
     alsa-utils \
     man-db \
     vim \
