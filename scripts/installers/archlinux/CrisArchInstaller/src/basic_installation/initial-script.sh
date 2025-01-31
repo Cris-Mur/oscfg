@@ -30,13 +30,19 @@ manage_timedate() {
     ## set mirrorlist
     ## pacstrap installation
 
-### Script runing
-manage_timedate
-$UTILS/disc_detector.sh
-$BASIC_INSTALLATION_SCRIPTS/manage_storage.sh
 
 # Verifica si el usuario tiene permisos de root (requerido para obtener información completa)
 if [[ $EUID -ne 0 ]]; then
     echo "❌ Este script debe ejecutarse como root o con sudo."
     exit 1
 fi
+
+main_script (){
+### Script runing
+    clear
+    manage_timedate
+    clear
+    $UTILS/disc_detector.sh
+    clear
+    $BASIC_INSTALLATION_SCRIPTS/manage_storage.sh
+}
