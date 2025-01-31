@@ -35,10 +35,19 @@ Plug 'leafgarland/typescript-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'yaegassy/coc-astro', {'do': 'yarn install --frozen-lockfile'}
 Plug 'junegunn/fzf.vim'
+Plug 'wuelnerdotexe/vim-astro'
 
 call plug#end()
 
+" Astro Setup
+"
+" let g:astro_stylus = 'enable' " No works properly
+
+
+
+" GamePAD Controls Section
 let mapleader=" "
 " Shortcuts
 " Global
@@ -84,21 +93,8 @@ let g:coc_global_extensions = [ 'coc-tsserver' ]
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Use <Ctrl-F> to format documents with prettier
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-noremap <C-F> :Prettier<CR>
-
-
-" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
-" unicode characters in the file autoload/float.vim
-set encoding=utf-8
-
 " TextEdit might fail if hidden is not set.
 set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -122,11 +118,8 @@ endif
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<C-g>u\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-g>u\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -219,6 +212,10 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
+
+" Use <Ctrl-F> to format documents with prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+noremap <C-F> :Format<CR>
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
