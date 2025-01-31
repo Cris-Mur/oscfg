@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Verificar si se proporcionó un archivo
+if [ $# -ne 1 ]; then
+    echo "Uso: $0 <archivo>"
+    exit 1
+fi
+
+FILE="$1"
+
+# Verificar si el archivo existe
+if [ ! -e "$FILE" ]; then
+    echo "Error: El archivo '$FILE' no existe."
+    exit 1
+fi
+
+# Obtener la fecha de creación del archivo
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS usa `stat -f %B`
+    TIMESTAMP=$(stat -f "%B" "$FILE")
+else
+    # Linux usa `stat -c %y`
+    TIMESTAMP=$(stat -c "%y" "$FILE")
+fi
+
+# Si el timestamp es 0, significa que el sistema de archivos no lo soporta
+if [ "$TIMESTAMP" -eq 0 ]; then
+    echo "Error: No se puede obtener la fecha de creación del archivo."
+    exit 1
+fi
+
+# Convertir el timestamp a formato legible
+NEW_NAME=$(date -d "$TIMESTAMP" +"%Y-%m-%d_%H-%M-%S")
+
+# Obtener la extensión del archivo si la tiene
+EXTENSION="${FILE##*.}"
+if [ "$EXTENSION" != "$FILE" ]; then
+    NEW_NAME="${NEW_NAME}.${EXTENSION}"
+fi
+
+# Renombrar el archivo
+mv -vi "$FILE" "$NEW_NAME"
+
+echo "Archivo renombrado a: $NEW_NAME"
+
