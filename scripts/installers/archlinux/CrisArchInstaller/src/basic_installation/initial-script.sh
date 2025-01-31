@@ -7,21 +7,30 @@
 UTILS="src/basic_installation/utils"
 BASIC_INSTALLATION_SCRIPTS="src/basic_installation"
 
+pause(){
+    read -p "Presione ENTER para continuar..."
+}
+
 manage_timedate() {
     source $UTILS/ask_yes_no.sh
     echo ""
-    echo "Por favor verifica que la maquina usa la sincronizacion NTP."
+    echo "Por favor verifique si la maquina usa la sincronizacion NTP."
     echo ""
     timedatectl
     response=$(ask_yes_no "¿Es correcta la configuración?" "y")
 
-    # Tomar acción según la respuesta
-    if [[ "$response" =~ ^[yY]$ ]]; then
-        echo "✅ Continuando con la instalación..."
-    else
+    if [[ ! "$response" =~ ^[yY]$ ]]; then
         $BASIC_INSTALLATION_SCRIPTS/enable_ntp.sh
     fi
+    pause
+}
 
+root_checker() {
+    # Verifica si el usuario tiene permisos de root (requerido para obtener información completa)
+    if [[ $EUID -ne 0 ]]; then
+        echo "❌ Este script debe ejecutarse como root o con sudo."
+        exit 1
+    fi
 }
 
 # TODO
@@ -30,19 +39,12 @@ manage_timedate() {
     ## set mirrorlist
     ## pacstrap installation
 
-
-# Verifica si el usuario tiene permisos de root (requerido para obtener información completa)
-if [[ $EUID -ne 0 ]]; then
-    echo "❌ Este script debe ejecutarse como root o con sudo."
-    exit 1
-fi
-
 main_script (){
 ### Script runing
     clear
     manage_timedate
     clear
-    $UTILS/disc_detector.sh
-    clear
     $BASIC_INSTALLATION_SCRIPTS/manage_storage.sh
 }
+
+main_script
