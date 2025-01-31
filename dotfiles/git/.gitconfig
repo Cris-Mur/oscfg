@@ -5,3 +5,7 @@
 	editor = vim
 [pull]
 	rebase = false
+[status-tree]
+	indent = 4
+[alias]
+	tree = !sh -c \"/home/crismur/.local/share/gem/ruby/3.2.0/gems/git-status-tree-2.0.0/bin/git-status-tree\"
