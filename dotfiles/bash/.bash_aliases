@@ -20,8 +20,10 @@ alias la='ls -A'
 alias l='ls -lh'
 
 if [ -x /usr/bin/tree ]; then
-    alias t='tree -aI "node_modules|.git"'
+    alias t='tree -aI "node_modules|.*"'
     alias td='t -d'
+    alias ta='tree -aI "node_modules|.git"'
+    alias tda='ta -d'
 fi
 
 alias mv='mv -iv'
