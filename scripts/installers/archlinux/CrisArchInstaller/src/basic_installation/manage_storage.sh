@@ -1,0 +1,23 @@
+echo "##########################################################################"
+echo "ATENCION: Tenga en cuenta que el sistem de archivos a instalar debe"
+echo "tener adecuadamente imsplementadas las secciones canonicas de un Linux SO"
+echo "Segun la guia de instalación de la WIKI"
+echo "##########################################################################"
+echo ""
+echo "ROOT: / /mnt"
+echo "BOOT: /boot /mnt/boot"
+echo "[SWAP] /dev/**"
+echo ""
+echo "##########################################################################"
+echo ""
+echo "Tenga en cuenta que si lo desea puede separar el sistema de archivos del"
+echo "usurario en una particion independiente."
+echo "HOME: /home /mnt/home"
+echo ""
+echo "##########################################################################"
+echo "Verificando los puntos de montaje canonicos"
+check_mnt(){
+    EXPECTED_FS_TYPE="ext4"
+    MOUNT_POINT="/mnt"
+    FS_TYPE=$(findmnt -n -o FSTYPE "$MOUNT_POINT" 2>/dev/null)
+}
