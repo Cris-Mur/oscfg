@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-src_dir="$HOME/oscfg/dotfiles/env"
+src_dir="$HOME/oscfg/enviroments"
 
 if [ -d "$src_dir" ]; then
     ln -s "$src_dir" "$HOME/env"
