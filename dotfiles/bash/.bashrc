@@ -47,3 +47,8 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# PICO SDK PATH
+#
+
+export PICO_SDK_PATH=$HOME/Documents/Test/PicoSDK/pico-sdk
