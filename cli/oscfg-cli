@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source "$SCRIPT_DIR/lib/utils.sh"
+source "$SCRIPT_DIR/lib/routines/initial"
+
+
+host_os=""
+host_shell="${SHELL:-}"
+
+default_config_dir="$HOME/.config"
+
+oscfg_config_dir="${CUSTOM_CONFIG_DIR:-$default_config_dir}"
+
+
+initial_routine
+sleep 0.5;
+clear
