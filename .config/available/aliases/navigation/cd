@@ -1,0 +1,7 @@
+# Aliases to quick navigation
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias ~="cd ~"
+

@@ -1,0 +1,14 @@
+## Aliases for tree command
+
+
+if [ -x /usr/bin/tree ]; then # only if tree are installed
+
+	normalIgnorePattern=${OSCFG_TREE_N_IGNORE_PATTERN:-.*};
+	allIgnorePattern=${OSCFG_TREE_A_IGNORE_PATTERN:-.*}
+
+    	alias t='tree -aI "$normalIgnorePattern"'
+    	alias td='t -d'
+    	alias ta='tree -aI "$allIgnorePattern'
+    	alias tda='ta -d'
+fi
+

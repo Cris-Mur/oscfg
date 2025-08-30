@@ -1,0 +1,4 @@
+## Aliases for Storage Disks
+
+alias df="df -h"
+alias du="du -sh *"

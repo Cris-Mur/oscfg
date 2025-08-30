@@ -1,0 +1,14 @@
+if [ -x /usr/bin/emacs ]; then
+    emacs_path="$HOME/.emacs.d/bin"
+    PATH="$PATH:$emacs_path"
+fi
+
+if [ -d /opt/sonar-scanner ]; then
+    sonar_scanner_path="/opt/sonar-scanner/bin"
+    PATH="$PATH:$sonar_scanner_path"
+fi
+
+if [ -d $HOME/oscfg/scripts/utils ]; then
+    utils_path="$HOME/oscfg/scripts/utils/bin"
+    PATH="$PATH:$utils_path"
+fi

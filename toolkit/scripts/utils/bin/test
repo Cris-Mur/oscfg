@@ -1,0 +1,66 @@
+# Crear un script con shebang y plantilla básica
+function newscript() {
+    local lang="$1"
+    local file="${2:-script}"
+
+    case "$lang" in
+        py|python)
+            file="${file%.py}.py"
+            cat > "$file" <<'EOF'
+#!/usr/bin/env python3
+"""
+Script generado automáticamente.
+"""
+
+def main():
+    print("Hello, Python!")
+
+if __name__ == "__main__":
+    main()
+EOF
+            ;;
+        js|node)
+            file="${file%.js}.js"
+            cat > "$file" <<'EOF'
+#!/usr/bin/env node
+/**
+ * Script generado automáticamente.
+ */
+
+function main() {
+    console.log("Hello, Node.js!");
+}
+
+main();
+EOF
+            ;;
+        sh|bash)
+            file="${file%.sh}.sh"
+            cat > "$file" <<'EOF'
+#!/usr/bin/bash
+# Script generado automáticamente.
+set -euo pipefail
+
+echo "Hello, Bash!"
+EOF
+            ;;
+        env-bash|envsh)
+            file="${file%.sh}.sh"
+            cat > "$file" <<'EOF'
+#!/usr/bin/env bash
+# Script generado automáticamente.
+set -euo pipefail
+
+echo "Hello, Bash (env)!"
+EOF
+            ;;
+        *)
+            echo "Uso: newscript {py|js|sh|env-bash} [nombre]"
+            return 1
+            ;;
+    esac
+
+    chmod +x "$file"
+    echo "✅ Creado $file con plantilla de $lang"
+}
+

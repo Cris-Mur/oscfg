@@ -1,0 +1,10 @@
+# Aliases for better ls
+
+alias ls="ls --color=auto"
+alias l='ls -l'
+alias ll="ls -lF"
+alias llh='ls -lFh'
+alias lla="ls -lFha"
+alias la="ls -A"
+alias lt="ls -ltr"   # orden por fecha
+

@@ -1,0 +1,64 @@
+#
+# ~/.bashrc
+#[ @Cris-Mur ]
+#
+# ~/.bashrc: executed by bash(1) for non-login shells.
+#
+
+
+## XDG Setup
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# end non-login space
+############################################################
+case $- in
+    *i*) ;;
+      *) return ;;
+esac
+
+## edit below ##
+#@
+
+############################################################
+## only for interactive shells
+
+if [ -f ~/.bash_history_options	 ]; then
+	. ~/.bash_history_options
+fi
+
+
+if [ -f ~/.bash_aliases ]; then
+	. ~/.bash_aliases
+fi
+
+
+
+if [ -f ~/.bash_cfg_prompt ]; then
+	. ~/.bash_cfg_prompt
+fi
+
+
+# Bash Completion settings
+if [ -f ~/.bash_cfg_completion ]; then
+	. ~/.bash_cfg_completion
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/home/crismur/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# PICO SDK PATH
+#
+
+export PICO_SDK_PATH=$HOME/Documents/Test/PicoSDK/pico-sdk

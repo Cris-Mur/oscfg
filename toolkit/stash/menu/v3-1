@@ -1,0 +1,116 @@
+#!/bin/bash
+
+# ====================================================
+# FUNCIONES DE UTILIDAD
+# ====================================================
+draw_menu() {
+    local -n opts=$1   # Array de opciones (referencia)
+    local sel=$2       # Índice seleccionado
+    local title=$3     # Título del menú
+
+    clear
+    tput setaf 4; tput bold
+    echo "╔════════════════════════════════════╗"
+    printf "║   🚀 %-30s 🚀   ║\n" "$title"
+    echo "╚════════════════════════════════════╝"
+    tput sgr0
+    echo
+
+    for i in "${!opts[@]}"; do
+        if [[ $i == $sel ]]; then
+            tput setaf 2; tput bold
+            printf " ► %s\n" "${opts[$i]}"
+            tput sgr0
+        else
+            printf "   %s\n" "${opts[$i]}"
+        fi
+    done
+
+    echo
+    tput setaf 3
+    echo "[Usa ↑ ↓ | Enter para elegir | q o ESC para salir/volver]"
+    tput sgr0
+}
+
+read_key() {
+    IFS= read -rsn1 input
+    if [[ $input == $'\x1b' ]]; then
+        read -rsn2 -t 0.001 rest
+        input+=$rest
+    fi
+    echo "$input"
+}
+
+# ====================================================
+# ACCIONES
+# ====================================================
+main_action() {
+    case $1 in
+        0) echo "🔵 Iniciando servicio..."; sleep 1 ;;
+        1) echo "🔴 Deteniendo servicio..."; sleep 1 ;;
+        2) echo "🟡 Reiniciando servicio..."; sleep 1 ;;
+        3) submenu_status ;;  # Entrar al submenú
+        4) echo "👋 Saliendo..."; exit 0 ;;
+    esac
+}
+
+submenu_action() {
+    case $1 in
+        0) echo "📊 Estado detallado del servicio..."; sleep 1 ;;
+        1) echo "📄 Mostrando logs recientes..."; sleep 1 ;;
+        2) return 1 ;;  # Volver al menú principal
+    esac
+    return 0
+}
+
+# ====================================================
+# MENÚ PRINCIPAL
+# ====================================================
+main_menu() {
+    local options=("Iniciar servicio" "Detener servicio" "Reiniciar servicio" "Ver estado" "Salir")
+    local selected=0
+
+    while true; do
+        draw_menu options $selected "MENÚ PRINCIPAL"
+        input=$(read_key)
+
+        case $input in
+            $'\x1b[A') ((selected--));;  # Flecha arriba
+            $'\x1b[B') ((selected++));;  # Flecha abajo
+            "") main_action $selected ;;
+            q|Q|$'\x1b') echo "👋 Saliendo..."; exit 0 ;;
+        esac
+
+        ((selected < 0)) && selected=0
+        ((selected >= ${#options[@]})) && selected=$((${#options[@]} - 1))
+    done
+}
+
+# ====================================================
+# SUBMENÚ DE ESTADO
+# ====================================================
+submenu_status() {
+    local options=("Ver estado detallado" "Ver logs" "Volver")
+    local selected=0
+
+    while true; do
+        draw_menu options $selected "SUBMENÚ: ESTADO"
+        input=$(read_key)
+
+        case $input in
+            $'\x1b[A') ((selected--));;
+            $'\x1b[B') ((selected++));;
+            "") submenu_action $selected || return ;;
+            q|Q|$'\x1b') return ;;
+        esac
+
+        ((selected < 0)) && selected=0
+        ((selected >= ${#options[@]})) && selected=$((${#options[@]} - 1))
+    done
+}
+
+# ====================================================
+# INICIO DEL PROGRAMA
+# ====================================================
+main_menu
+

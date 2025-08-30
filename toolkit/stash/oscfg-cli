@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+CONFIG_DIR="$HOME/.config/shell-config"
+AVAILABLE="$CONFIG_DIR/available"
+ENABLED="$CONFIG_DIR/enabled"
+
+usage() {
+    echo "Uso: $0 {list|enable|disable|reload}"
+    exit 1
+}
+
+list_modules() {
+    echo "Módulos disponibles:"
+    for f in "$AVAILABLE"/*; do
+        name=$(basename "$f")
+        if [ -L "$ENABLED/$name" ]; then
+            echo "  [✔] $name"
+        else
+            echo "  [ ] $name"
+        fi
+    done
+}
+
+enable_module() {
+    local module="$1"
+    if [ ! -f "$AVAILABLE/$module" ]; then
+        echo "❌ No existe módulo: $module"
+        exit 1
+    fi
+    ln -sf "$AVAILABLE/$module" "$ENABLED/$module"
+    echo "✔ Activado: $module"
+}
+
+disable_module() {
+    local module="$1"
+    if [ -L "$ENABLED/$module" ]; then
+        rm "$ENABLED/$module"
+        echo "✖ Desactivado: $module"
+    else
+        echo "❌ El módulo no estaba activado: $module"
+    fi
+}
+
+reload_shell() {
+    # Forzar recarga del script maestro en la shell actual
+    source "$CONFIG_DIR/shell-config.sh"
+    echo "🔄 Configuración recargada"
+}
+
+case "$1" in
+    list) list_modules ;;
+    enable) enable_module "$2" ;;
+    disable) disable_module "$2" ;;
+    reload) reload_shell ;;
+    *) usage ;;
+esac
+

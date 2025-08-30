@@ -1,0 +1,7 @@
+## Aliases for file management
+
+alias rm="rm -iv"   # pide confirmación antes de borrar
+alias cp="cp -riv"
+alias mv="mv -iv"
+alias mkdir="mkdir -pv"
+

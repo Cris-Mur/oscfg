@@ -1,0 +1,4 @@
+## Aliases for network management
+
+alias ports="netstat -tulnp"
+
