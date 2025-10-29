@@ -1,12 +1,29 @@
 # OSCFG
 ---
-Es una herramienta que te permite administrar tus configuraciones para tu sistema unix-like.
-
-Tener un buen control sobre las configuraciones de tu sistema tiene muchas ventajas, principalmente definir cual es el comportamiento de tu sistema, sin embargo si no haces una copia de tus `.dotfiles` o gestionas estas configuraciones de alguna manera, ellas no te van a seguir, y se quedaran atrás, cuando cambies o instales un nuevo sistema operativo.
-
-Muchas herramientas y elementos de un sistema unix-like, gestionan su comportamiento mediante configuraciones que normalmente están guardadas en archivos sea dentro de `.config/` o como archivos "dotfile", es decir aquellos cuyo nombre empieza por un punto, Ej. `.bashrc`, estos elementos los puedes encontrar en la carpeta personal de cada usuario del sistema `/home/Kogima`, e incluso para el usuario `/root`.
+Operative System ConFiGuration, Es una herramienta que permite la gestión de configuraciones y personalización de un sistema compatible con ".dotFiles", un mecanismo de configuración y personalización de sistemas Unix-Like
 
 ---
+
+## Features
+
+Esta Herrmienta toma una carpeta donde previamente se han alojado archivos punto, sean en la raiz o como directorios, y los administra como si fueran selecionables que son habilitados o deshabilitados.
+
+Para ello hace uso de un directorio intermedio.
+
+# Uso
+
+Esta herramienta esta pensada para ser usada siendo instalada en su sistema. por ello existe una solución para este proceso.
+
+```sh
+git clone https://github.com/cris-mur/oscfg.git && cd ./oscfg
+./install.sh
+```
+
+
+
+---
+
+
 
 ## Author
 * **Cristian A. Murcia T.** - [Cris-Mur](https://github.com/Cris-Mur/)
