@@ -1,4 +1,0 @@
-## Aliases for find command
-
-alias f="find . -name"
-

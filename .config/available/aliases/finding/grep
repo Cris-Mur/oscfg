@@ -1,4 +1,0 @@
-## Aliases for grep command
-
-alias grep="grep --color=auto"
-alias psg="ps aux | grep -i" 
