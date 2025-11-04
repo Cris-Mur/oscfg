@@ -1,0 +1,32 @@
+# ~/.oscfg_defaults | ~/.local/share/oscfg/.oscfg_defaults
+
+
+CUSTOM_DOTFOLDER="~/.config/$USER-dotfiles"
+
+#        path de su repositorio de dotfiles
+
+# ---------------------------------------------------------------------------
+
+PROFILE_ENABLE_DIR="~/.local/share/oscfg/enable"
+SNAPSHOT_DIR="~/.local/share/oscfg/snapshots"
+OLD_BACKUP_DIR="~/.local/share/oscfg/origin/"
+
+#        paths de repositorio local
+
+# ---------------------------------------------------------------------------
+
+JOURNAL_DIR="~/.local/share/oscfg/journal/"
+JOURNAL_FILENAME="stdlogfile.log"
+
+#        path y nombre del archivo de logs
+
+# ---------------------------------------------------------------------------
+
+VERBOSE_LEVEL="normal" 
+# {0..3} | none, normal, extra, debug
+
+#        configuración de salidas de logs
+        
+# ---------------------------------------------------------------------------
+
+

@@ -1,0 +1,156 @@
+
+              ▒█████    ██████  ▄████▄    █████▒ ▄████ 
+             ▒██▒  ██▒▒██    ▒ ▒██▀ ▀█  ▓██   ▒ ██▒ ▀█▒
+             ▒██░  ██▒░ ▓██▄   ▒▓█    ▄ ▒████ ░▒██░▄▄▄░
+             ▒██   ██░  ▒   ██▒▒▓▓▄ ▄██▒░▓█▒  ░░▓█  ██▓
+             ░ ████▓▒░▒██████▒▒▒ ▓███▀ ░░▒█░   ░▒▓███▀▒
+            ░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░░ ░▒ ▒  ░ ▒ ░    ░▒   ▒ 
+              ░ ▒ ▒░ ░ ░▒  ░ ░  ░  ▒    ░       ░   ░ 
+            ░ ░ ░ ▒  ░  ░  ░  ░         ░ ░   ░ ░   ░ 
+                ░ ░        ░  ░ ░                   ░ 
+                  ░                       
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+USAGE: oscfg [-h, -v, --check-dependences][ user | profile ][ argument ]
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Una herramienta que gestiona configuraciones del sistema, mediante
+bundles o paquetes de configuraciones, alojadas en un repositorio de
+dotfiles.
+
+Cada paquete o "bundle", representa un sistema de archivos espejo al
+$HOME del usuario.
+
+OSCFG, solo administra el repositorio. siempre y cuando se respete,
+lo anterior su experiencia con la herramienta ha de ser la esperada
+
+Estructura de su repositorio de .dotfiles:
+
+default path = ~/.config/user_dotfiles
+
+repo /
+    bundle /
+        .dotfile
+        .dotfolder /
+            ... 
+         
+###############################################################################
+###############################################################################
+
+
+SYNOPSIS:
+
+    oscfg-cli [OPTION ...] [user|profile ...]
+
+OPTIONS:
+
+    --check-dependences             Try check script utility dependences
+
+    -v, -V, --version, v, version   Show oscfg-cli version
+    -h, --help, h, help, default    Show this message
+
+    All commands have a sub help flag that's opens this message
+
+USER:
+
+    -u, --user, u, user             User commands.
+
+dotfolder bundle:
+
+    <user> bundle                   Use: user bundle <cmd>
+    
+         new <bundle-name>          Create a bundle folder on user .dotfolder
+         delete <bundle-name>       REMOVE bundle folder inside of .dotfolder
+
+         list all                   list all available bundles.
+         list <bundle>              Explore inside of the bundle.
+
+         enable <bundle>            Enable bundle linking on profile folder.
+         disable <bundle>           Remove link on profile folder.
+                                    
+         edit [add | remove]        Edit Bundle, adding and remove dotfiles.
+
+            add <bundle-name> <path to copy>
+            
+            remove <bundle-name> <path starting on .dotfolder>
+            
+                                                    || .dotfolder/
+                                                    || ├── example/
+            remove example .config/exapledir        || │    ├─ .config/
+            remove example .example_rc              || │    │  └── exampledir
+                                                    || │    └─ .example_rc
+                                                    || └── anotherBundle 
+
+
+            remove <bundle-name> <path starting on $HOME>
+
+    #################################################################
+    ##  Use with caution this commands, be careful!! You can lost  ##
+    ##  your settings.                                             ##
+    #################################################################
+    
+
+
+dotfolder comands:
+
+    <user> dotfolder                    Commands for dotfolder repository
+
+        new $path_to                    Create a custom dotfolder repository
+        clone <git-repo-url>
+        change <new-dotfolder-path>
+        [git commands]
+
+    profile status
+    profile install <bundle> # enable
+    profile fix <bundle> # remake links on home
+    profile uninstall <bundle> #// remove links of home
+    profile uninstall <bundle> restore #// restore old_backup_dir/.files
+    profile snapshot all
+    profile snapshot <bundle>
+    profile snapshot list
+    profile snapshot list <date>
+    profile snapshot list <date> <bundle>
+    profile snapshot restore <date> <bundle>
+
+
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+
+
+DEFAULTS:
+
+# ~/.oscfg_defaults | ~/.local/share/oscfg/.oscfg_defaults
+
+
+CUSTOM_DOTFOLDER="~/.config/{user}_dotfiles"
+
+        path de su repositorio de dotfiles
+
+# ---------------------------------------------------------------------------
+
+PROFILE_ENABLE_DIR="~/.local/share/oscfg/enable"
+SNAPSHOT_DIR="~/.local/share/oscfg/snapshots"
+OLD_BACKUP_DIR="~/.local/share/oscfg/origin/"
+
+        paths de repositorio local
+
+# ---------------------------------------------------------------------------
+
+JOURNAL_DIR="~/.local/share/oscfg/journal/"
+JOURNAL_FILENAME="stdlogfile.log"
+
+        path y nombre del archivo de logs
+
+# ---------------------------------------------------------------------------
+
+VERBOSE_LEVEL="#" #// {0..3} | none, normal, extra, debug
+
+        configuración de salidas de logs
+        
+# ---------------------------------------------------------------------------
+
+
+

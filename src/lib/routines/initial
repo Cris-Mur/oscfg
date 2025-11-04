@@ -1,0 +1,67 @@
+!#/usr/bin/env bash
+
+# Install routine
+
+identify_System() {
+        local so=""
+        local shell=""
+        echo "Identifying your system..."
+        sleep 1;
+        if [ -x /usr/bin/uname ]; then
+                echo ""
+                so=$(uname -o)
+                shell=$(getent passwd "$USER" | cut -d: -f7)
+                echo "Your system is: $so"
+                echo "Your default user shell is: $shell"
+        else
+                echo "Your system cannot be identified. please input your info :D"
+                read -p "SO:" $so
+                read -p "SHELL: " $shell
+        fi
+        host_os=$so
+        host_shell=$shell
+        echo "-----------------------------------------"
+}
+
+print_identified_sys() {
+        echo "Your System are:"
+        echo "- Operative System: $host_os"
+        echo "- Default User Shell: $host_shell"
+        echo "---------------------------------"
+        echo "oscfg - configuration directory: $oscfg_config_dir"
+        sleep 0.5;
+}
+
+exist_config_folder() {
+        sleep 0.5;
+        echo "NOTE:"
+        echo "You can use a custom directory, using this env"
+        echo "CUSTOM_CONFIG_DIR"
+        sleep 1.5;
+	clear;
+        echo "Evaluating config folder existence..."
+        local test_dir="$oscfg_config_dir/oscfg/"
+        echo "Testing $test_dir"
+	countdown
+        if [ -d "$test_dir" ]; then
+                alert warning "ATENTION: It is possible that a previous configuration already exists on your system!!"
+                echo "only we check if directory already exist..."
+        else
+                echo "You have a Clean System"
+        fi
+        echo "Evaluated: $test_dir"
+}
+
+initial_routine() {
+        identify_System
+        sleep 2.5;
+	clear
+        exist_config_folder
+        sleep 0.5;
+        print_identified_sys
+        echo "Initial routine finished..."
+        pause
+	clear
+        countdown
+        sleep 0.5;
+}

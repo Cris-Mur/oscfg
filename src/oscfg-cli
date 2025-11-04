@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+## OSCFG-CLI
+
+oscfg_source_path=$(readlink -f $0)
+script_src=$(dirname $oscfg_source_path)
+SCRIPT_DIR="$script_src"
+
+
+source "$SCRIPT_DIR/lib/utils.sh"
+# User
+
+source "$SCRIPT_DIR/lib/commands/user.sh"
+user_load() {
+    set_dot_defaults;
+    set_dotfolder "$CUSTOM_DOTFOLDER";
+    set_profile_folder "$PROFILE_ENABLE_DIR";
+}
+
+set_dot_defaults() {
+    OSCFG_user_dotfile="$HOME/.oscfg_defaults";
+    OSCFG_local="$HOME/.local/share/oscfg";
+
+    if [ -e $OSCFG_user_dotfile ];then
+        alert debug "Using user config file"
+        source $OSCFG_user_dotfile;
+        alert debug "$CUSTOM_DOTFOLDER"
+        alert debug "$PROFILE_ENABLE_DIR"
+        alert debug "$SNAPSHOT_DIR"
+        alert debug "$OLD_BACKUP_DIR"
+        alert debug "$JOURNAL_DIR"
+        alert debug "$JOURNAL_FILENAME"
+        alert debug "$VERBOSE_LEVEL"
+
+        return 0;
+    fi
+
+    if [ -e "$OSCFG_local/.oscfg_defaults" ]; then
+        alert debug "Using OSCFG config file"
+        source "$OSCFG_local/.oscfg_defaults";
+        alert debug "$CUSTOM_DOTFOLDER"
+        alert debug "$PROFILE_ENABLE_DIR"
+        alert debug "$SNAPSHOT_DIR"
+        alert debug "$OLD_BACKUP_DIR"
+        alert debug "$JOURNAL_DIR"
+        alert debug "$JOURNAL_FILENAME"
+        alert debug "$VERBOSE_LEVEL"
+
+        return 0;
+    fi
+    
+    alert warning "oscfg not installed!"
+
+    if [ -e $SCRIPT_DIR ]; then
+        alert warning "Using script default file!!!"
+        source "$SCRIPT_DIR/src/misc/.oscfg_defaults"
+        cp "$SCRIPT_DIR/src/misc/.oscfg_defaults" "$OSCFG_user_dotfile"
+        alert debug "$CUSTOM_DOTFOLDER"
+        alert debug "$PROFILE_ENABLE_DIR"
+        alert debug "$SNAPSHOT_DIR"
+        alert debug "$OLD_BACKUP_DIR"
+        alert debug "$JOURNAL_DIR"
+        alert debug "$JOURNAL_FILENAME"
+        alert debug "$VERBOSE_LEVEL"
+
+        return 0;
+
+    fi
+
+    alert error "None defaultfile located!"
+
+
+    exit 1;
+
+}
+
+set_dotfolder() {
+    if validate_path "$1" ; then
+        local dotfolder=$(resolve_path $1);
+        CUSTOM_DOTFOLDER="$dotfolder";
+        return 0;
+    fi
+    alert error "Cannot set_dotfolder";
+    exit 1;
+
+}
+
+
+set_profile_folder() {
+    if validate_path "$1" ; then
+        local dotfolder=$(resolve_path $1);
+        PROFILE_ENABLE_DIR="$dotfolder";
+        return 0;
+    fi
+    alert warning "Cannot found a profile folder. OSCFG Not installed";
+    return 1;
+}
+
+user_load;
+
+source "$SCRIPT_DIR/lib/commands/dependences.sh"
+source "$SCRIPT_DIR/lib/commands/version.sh"
+source "$SCRIPT_DIR/lib/commands/usage.sh";
+
+source "$SCRIPT_DIR/lib/commands/profile.sh"
+
+####
+
+
+DEFAULT_DOTFILE_DIR="$HOME/.config/user_dotfiles"
+CONFIG_DIR=${OSCFG_USER_CONFIG_FOLDER:-"$DEFAULT_DOTFILE_DIR"}
+
+
+source "$SCRIPT_DIR/lib/file-management/listing.sh"
+source "$SCRIPT_DIR/lib/file-management/symlinks.sh"
+source "$SCRIPT_DIR/lib/dotfile-directory.sh"
+
+
+
+get_safe_dir_tree() {
+    if [[ -e $1  ]]; then
+        if [ -x /usr/bin/tree ]; then
+            tree -C -a $1 | tail -n +2 | head -n -1;
+        fi
+    else
+        echo -e "Directory don't exist D:";
+    fi
+}
+
+get_user_config_dir() {
+    if [[ $CONFIG_DIR -eq ""  ]]; then
+        if [ -x /usr/bin/tree ]; then
+            echo -e ""
+            tree -C -a $AVAILABLE;
+        fi
+    fi
+}
+
+source "$SCRIPT_DIR/lib/commands/reload.sh";
+source "$SCRIPT_DIR/lib/commands/status.sh";
+
+case "$1" in
+    --check-dependences) chck_dependences ;;
+    -v | -V | --version | v | version) version ;;
+    -h | --help | h | help) usage ;;
+    -u | --user | u | user) user "${@:2}" ;;
+    -p | --profile | p | profile) echo "PROFILE ${@:2}" ;;
+    *) usage ;;
+esac
+
