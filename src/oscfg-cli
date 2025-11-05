@@ -52,8 +52,8 @@ set_dot_defaults() {
 
     if [ -e $SCRIPT_DIR ]; then
         alert warning "Using script default file!!!"
-        source "$SCRIPT_DIR/src/misc/.oscfg_defaults"
-        cp "$SCRIPT_DIR/src/misc/.oscfg_defaults" "$OSCFG_user_dotfile"
+        source "$SCRIPT_DIR/misc/.oscfg_defaults"
+        cp "$SCRIPT_DIR/misc/.oscfg_defaults" "$OSCFG_user_dotfile"
         alert debug "$CUSTOM_DOTFOLDER"
         alert debug "$PROFILE_ENABLE_DIR"
         alert debug "$SNAPSHOT_DIR"
